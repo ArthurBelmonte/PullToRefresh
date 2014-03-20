@@ -47,7 +47,7 @@
 @synthesize delegate, scrollView, startingContentInset;
 
 - (void)showActivity:(BOOL)shouldShow animated:(BOOL)animated {
-    if (shouldShow) [self.ctivityView startAnimating];
+    if (shouldShow) [self.activityView startAnimating];
     else [self.activityView stopAnimating];
     
     [UIView animateWithDuration:(animated ? 0.1f : 0.0) animations:^{
