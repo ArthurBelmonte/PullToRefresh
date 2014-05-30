@@ -67,7 +67,7 @@
     }];
 }
 
-- (id)initWithScrollView:(UIScrollView *)scrollView {
+- (id)initWithScrollView:(UIScrollView *)scroll {
     CGRect frame = CGRectMake(0.0f, 0.0f - scroll.bounds.size.height, scroll.bounds.size.width, scroll.bounds.size.height);
     
     if ((self = [super initWithFrame:frame])) {
