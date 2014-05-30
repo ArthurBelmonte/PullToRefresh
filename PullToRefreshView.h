@@ -9,7 +9,7 @@
 //
 // The MIT License (MIT)
 // Copyright © 2012 Sonny Parlin, http://sonnyparlin.com
-// 
+//
 // //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -33,7 +33,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 typedef enum {
-  PullToRefreshViewStateNormal = 0,
+    PullToRefreshViewStateNormal = 0,
 	PullToRefreshViewStateReady,
 	PullToRefreshViewStateLoading
 } PullToRefreshViewState;
@@ -53,6 +53,7 @@ typedef enum {
 @property (nonatomic, strong) UILabel *statusLabel;
 @property (nonatomic, strong) CALayer *arrowImage;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) UIImageView *customActivityView;
 
 
 - (void)refreshLastUpdatedDate;

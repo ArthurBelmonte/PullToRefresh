@@ -47,8 +47,14 @@
 @synthesize delegate, scrollView, startingContentInset;
 
 - (void)showActivity:(BOOL)shouldShow animated:(BOOL)animated {
-    if (shouldShow) [self.activityView startAnimating];
-    else [self.activityView stopAnimating];
+    if (self.customActivityView) {
+        if (shouldShow) [self.customActivityView startAnimating];
+        else [self.customActivityView stopAnimating];
+    }
+    else {
+        if (shouldShow) [self.activityView startAnimating];
+        else [self.activityView stopAnimating];
+    }
     
     [UIView animateWithDuration:(animated ? 0.1f : 0.0) animations:^{
         self.arrowImage.opacity = (shouldShow ? 0.0 : 1.0);
@@ -61,7 +67,7 @@
     }];
 }
 
-- (id)initWithScrollView:(UIScrollView *)scroll {
+- (id)initWithScrollView:(UIScrollView *)scrollView {
     CGRect frame = CGRectMake(0.0f, 0.0f - scroll.bounds.size.height, scroll.bounds.size.width, scroll.bounds.size.height);
     
     if ((self = [super initWithFrame:frame])) {
@@ -114,8 +120,8 @@
 		[self.layer addSublayer:self.arrowImage];
         
         self.activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-		self.activityView.frame = CGRectMake(10.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
-		[self addSubview:self.activityView];
+        self.activityView.frame = CGRectMake(10.0f, frame.size.height - 38.0f, 20.0f, 20.0f);
+        [self addSubview:self.activityView];
 		
         self.enabled = YES;
 		[self setState:PullToRefreshViewStateNormal];
@@ -138,6 +144,14 @@
 	 ^{
 		 self.alpha = enabled ? 1 : 0;
 	 }];
+}
+
+- (void)setCustomActivityView:(UIImageView *)customActivityView
+{
+    _customActivityView = customActivityView;
+    _customActivityView.frame = CGRectMake(10.0f, scrollView.bounds.size.height - ((customActivityView.frame.size.height / 2) + 30.0f), customActivityView.frame.size.width, customActivityView.frame.size.height);
+    [self addSubview:_customActivityView];
+    [self.activityView removeFromSuperview];
 }
 
 - (void)refreshLastUpdatedDate {
